@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
@@ -26,15 +27,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.quizapp.R
 
 
 @Composable
 fun HomePage(navController: NavController) {
+
+    var userName = "Madara"
+    val categories = getCategoryItems()
+    val title: TextStyle = TextStyle(
+        fontSize = 32.sp,
+        fontWeight = FontWeight.W500,
+        color = Color.Black
+    )
+    val subTitle: TextStyle = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.W500,
+        color = Color.Gray
+    )
+
+
    Column(modifier = Modifier.fillMaxSize()
+       .padding(16.dp)
        .padding(WindowInsets.systemBars.asPaddingValues())) {
 
 
@@ -74,6 +94,13 @@ fun HomePage(navController: NavController) {
                )
            }
        }
+
+       Text("Hi, ${userName}", style = title)
+       Text("Welcome to Quiz App", style = subTitle)
+
+
+       CategoryList(categories = categories)
+       QuizCardRow()
 
    }
 }
