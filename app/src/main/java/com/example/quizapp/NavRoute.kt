@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizapp.Component.HomePage
 import com.example.quizapp.Component.LogIn
+import com.example.quizapp.Component.QuizPage
 
 @Composable
 fun NavRoute() {
@@ -20,6 +21,9 @@ fun NavRoute() {
         }
         composable("Home") {
             HomePage(navController = navController)
+        }
+        composable("QuizStart") {
+            QuizPage(navController = navController)
         }
     }
 }
