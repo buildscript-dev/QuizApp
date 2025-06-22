@@ -22,8 +22,8 @@ fun NavRoute() {
         composable("Home") {
             HomePage(navController = navController)
         }
-        composable("QuizStart") {
-            QuizPage(navController = navController)
+        composable("QuizStart/{category}") { backStackEntry ->
+            QuizPage(navController = navController, backStackEntry = backStackEntry)
         }
     }
 }

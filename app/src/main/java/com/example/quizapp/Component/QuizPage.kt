@@ -1,20 +1,8 @@
 package com.example.quizapp.Component
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,14 +12,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.quizapp.ui.theme.Grey40
+import androidx.navigation.NavBackStackEntry
 
 @Composable
-fun QuizPage(navController: NavController){
-    val quizList = quizs.shuffled()
+fun QuizPage(navController: NavController, backStackEntry: NavBackStackEntry) {
+    val category = backStackEntry.arguments?.getString("category") ?: "daily"
+    val quizList = remember(category) { getQuizListForCategory(category).shuffled() }
+
     var currentIndex by remember { mutableStateOf(0) }
     var showResult by remember { mutableStateOf(false) }
-
 
     val title: TextStyle = TextStyle(
         fontSize = 38.sp,
@@ -39,53 +28,51 @@ fun QuizPage(navController: NavController){
         color = Color.Black
     )
 
-    Column(modifier = Modifier.fillMaxSize()
-        .padding(20.dp)
-        .padding(WindowInsets.systemBars.asPaddingValues()),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .padding(WindowInsets.systemBars.asPaddingValues()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         TimerButton(
-            startTime = 30,
-            onTimeOut = {
-                // ⛔ Do something when timer hits 0
-                println("Time's up!")
+            onGoHome = {
+                navController.navigate("Home") {
+                    popUpTo("QuizStart/$category") { inclusive = true }
+                }
+            },
+            onRestartQuiz = {
+                navController.navigate("QuizStart/$category") {
+                    popUpTo("QuizStart/$category") { inclusive = true }
+                }
             }
         )
 
         Spacer(Modifier.height(30.dp))
 
-
-            Text("Choose the correct answer", style = title, textAlign = TextAlign.Center)
-
-
-        QuizPallet(
-            quizItem = quizList[currentIndex],
-            onNextClick = {
-                if (currentIndex < quizList.lastIndex) {
-                    currentIndex++
-                } else {
-                    showResult = true // 🏁 All questions done
-                }
-            }
+        Text(
+            "Choose the correct answer",
+            style = title,
+            textAlign = TextAlign.Center
         )
 
+        if (!showResult) {
+            QuizPallet(
+                quizItem = quizList[currentIndex],
+                onNextClick = {
+                    if (currentIndex < quizList.lastIndex) {
+                        currentIndex++
+                    } else {
+                        showResult = true
+                    }
+                }
+            )
+        } else {
 
-
+Column(modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally) {
+    Text("🎉 Quiz Completed!", fontSize = 28.sp, fontWeight = FontWeight.Bold)}
+    Text("Total Correct Answer: ${quizList.size}", fontSize = 28.sp, fontWeight = FontWeight.Bold)}
+        }
     }
-
-}
-
-
-@Composable
-fun ResultScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("🎉 Quiz Completed!", fontSize = 28.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Check your score or restart the quiz!", fontSize = 18.sp)
-        // Add a restart button if needed
-    }
-}

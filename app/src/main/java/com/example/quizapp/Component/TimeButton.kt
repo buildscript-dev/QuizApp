@@ -1,38 +1,63 @@
 package com.example.quizapp.Component
 
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.quizapp.ui.theme.Grey40
+import kotlinx.coroutines.delay
 
 @Composable
 fun TimerButton(
     startTime: Int = 30,
-    onTimeOut: () -> Unit = {}
+    onGoHome: () -> Unit,
+    onRestartQuiz: () -> Unit
 ) {
     var timeLeft by remember { mutableStateOf(startTime) }
+    var showDialog by remember { mutableStateOf(false) }
 
     // ⏱ Countdown logic
     LaunchedEffect(key1 = timeLeft) {
         if (timeLeft > 0) {
-            kotlinx.coroutines.delay(1000L) // wait 1 second
-            timeLeft--                     // then decrease time
+            delay(1000L)
+            timeLeft--
         } else {
-            onTimeOut()                   // trigger timeout action
+            showDialog = true
         }
     }
 
+    // 🧠 AlertDialog when time's up
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { /* Optional: prevent dismiss */ },
+            title = { Text("⏰ Time's Up!") },
+            text = { Text("Your time has run out. What do you want to do?") },
+            confirmButton = {
+                Button(onClick = {
+                    showDialog = false
+                    onRestartQuiz()
+                }) {
+                    Text("Restart Quiz")
+                }
+            },
+            dismissButton = {
+                Button(onClick = {
+                    showDialog = false
+                    onGoHome()
+                }) {
+                    Text("Go Home")
+                }
+            }
+        )
+    }
+
+    // ⌛ Timer button
     Button(
         onClick = {},
         enabled = false,
