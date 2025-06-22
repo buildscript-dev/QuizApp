@@ -30,72 +30,76 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.quizapp.R
 
-
 @Composable
 fun HomePage(navController: NavController) {
 
-    var userName = "Madara"
+    val userName = "Madara"
     val categories = getCategoryItems()
-    val title: TextStyle = TextStyle(
+
+    val titleStyle = TextStyle(
         fontSize = 32.sp,
         fontWeight = FontWeight.W500,
         color = Color.Black
     )
-    val subTitle: TextStyle = TextStyle(
+
+    val subTitleStyle = TextStyle(
         fontSize = 18.sp,
         fontWeight = FontWeight.W500,
         color = Color.Gray
     )
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(WindowInsets.systemBars.asPaddingValues())
+            .padding(16.dp)
+    ) {
 
-   Column(modifier = Modifier.fillMaxSize()
-       .padding(16.dp)
-       .padding(WindowInsets.systemBars.asPaddingValues())) {
+        // 🔔 Top Right Icons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .padding(horizontal = 4.dp)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(25.dp)
+                    )
+                    .size(42.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Notifications,
+                    contentDescription = "Notification"
+                )
+            }
 
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .padding(end = 16.dp)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(25.dp)
+                    )
+                    .size(42.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "Profile Picture",
+                    contentScale = ContentScale.Fit
+                )
+            }
+        }
 
-       Row(modifier = Modifier.fillMaxWidth(),
-           horizontalArrangement = Arrangement.End) {
-           IconButton(
-               onClick = {},
-               modifier = Modifier
-                   .padding(horizontal = 4.dp)
-                   .border(
-                       width = 1.dp,
-                       color = Color.Black,
-                       shape = RoundedCornerShape(25.dp)
-                   )
-                   .size(42.dp)
-           ) {
-               Icon(
-                   imageVector = Icons.Default.Notifications,
-                   contentDescription = "Notification",
-               )
-           }
-           IconButton(
-               onClick = {},
-               modifier = Modifier
-                   .padding(end = 16.dp)
-                   .border(
-                       width = 1.dp,
-                       color = Color.Black,
-                       shape = RoundedCornerShape(25.dp)
-                   )
-                   .size(42.dp)
-           ) {
-               Image(
-                   painter = painterResource(id = R.drawable.profile), // ✅ FIXED
-                   contentDescription = "Profile Picture",
-                   contentScale = ContentScale.Fit,
-               )
-           }
-       }
+        Text("Hi, $userName", style = titleStyle)
+        Text("Welcome to Quiz App", style = subTitleStyle)
 
-       Text("Hi, ${userName}", style = title)
-       Text("Welcome to Quiz App", style = subTitle)
-
-
-       CategoryList(categories = categories)
-       QuizCardRow(navController = navController )
-
-   }
+        CategoryList(categories = categories)
+        QuizCardRow(navController = navController)
+    }
 }

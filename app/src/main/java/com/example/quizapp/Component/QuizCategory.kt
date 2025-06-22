@@ -2,14 +2,14 @@ package com.example.quizapp.Component
 
 fun getQuizListForCategory(category: String): List<Quizs> {
     return when (category) {
-        "math" -> quizsMath
-        "daily" -> quizsDaily
-         "science" -> quizsScience
          "trend" -> quizsTrending
-         "anime" -> quizsAnime
-         "sport" -> quizsSports
-         "gaming" -> quizsGaming
+        "daily" -> quizsDaily
+        "math" -> quizsMath
          "history" -> quizsHistory
-        else -> emptyList() // default fallback
+         "science" -> quizsScience
+         "gaming" -> quizsGaming
+         "anime" -> quizsAnime
+         "sports" -> quizsSports
+        else -> emptyList()
     }
 }

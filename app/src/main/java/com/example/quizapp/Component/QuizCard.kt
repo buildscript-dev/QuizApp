@@ -1,6 +1,5 @@
 package com.example.quizapp.Component
 
-import android.provider.ContactsContract.Data
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +31,7 @@ import androidx.navigation.NavController
 import com.example.quizapp.R
 import com.example.quizapp.ui.theme.Yellow40
 
-// 🔸 Data class
+// 🔸 Data class for each quiz card
 data class QuizCard(
     @DrawableRes val image: Int,
     val title: String,
@@ -42,28 +41,26 @@ data class QuizCard(
     val category: String
 )
 
-// 🔸 Sample cards
-val QuizCards: List<QuizCard> = listOf(
-    QuizCard(R.drawable.speaker, "Trending", "Trending from the last 1 hour", "5 min", Color(0xFFFFC0CB),  category = "trend"),
-    QuizCard(R.drawable.daily, "Daily Quiz", "Your daily challenge is waiting!", "2 min", Color(0xFFFFC107), category = "daily"),
-    QuizCard(R.drawable.math, "Math Mania", "Sharpen your brain with numbers", "4 min", Color.Black, category = "math"),
-    QuizCard(R.drawable.history, "History Blast", "Time-travel through history facts", "6 min", Yellow40, category = "history"),
-    QuizCard(R.drawable.science, "Science Lab", "Test your scientific IQ", "3 min", Color(0xff0E2148), category = "science"),
-    QuizCard(R.drawable.gaming, "Gaming Legends", "How much do you know about games?", "5 min", Color(0xffC95792), category = "gaming"),
-    QuizCard(R.drawable.anime, "Anime Showdown", "Otaku mode: ON!", "4 min", Color(0xffFFDCDC), category = "anime"),
-    QuizCard(R.drawable.sports, "Sports Central", "For the true fans", "6 min", Color(0xffE07A5F), category = "sports")
+// 🔸 List of quiz cards
+val quizCards = listOf(
+    QuizCard(R.drawable.speaker, "Trending", "Trending from the last 1 hour", "5 min", Color(0xFFFFC0CB), "trend"),
+    QuizCard(R.drawable.daily, "Daily Quiz", "Your daily challenge is waiting!", "2 min", Color(0xFFFFC107), "daily"),
+    QuizCard(R.drawable.math, "Math Mania", "Sharpen your brain with numbers", "4 min", Color.Black, "math"),
+    QuizCard(R.drawable.history, "History Blast", "Time-travel through history facts", "6 min", Yellow40, "history"),
+    QuizCard(R.drawable.science, "Science Lab", "Test your scientific IQ", "3 min", Color(0xff0E2148), "science"),
+    QuizCard(R.drawable.gaming, "Gaming Legends", "How much do you know about games?", "5 min", Color(0xffC95792), "gaming"),
+    QuizCard(R.drawable.anime, "Anime Showdown", "Otaku mode: ON!", "4 min", Color(0xffFFDCDC), "anime"),
+    QuizCard(R.drawable.sports, "Sports Central", "For the true fans", "6 min", Color(0xffE07A5F), "sports")
 )
 
 @Composable
 fun QuizCardView(quizCard: QuizCard, navController: NavController) {
-    val selectedCategory = quizCard.category
-    val selectedQuizList = getQuizListForCategory(selectedCategory)
     Box(
         modifier = Modifier
             .width(320.dp)
             .height(450.dp)
             .padding(8.dp)
-            .graphicsLayer {}
+            .graphicsLayer() // placeholder for future animations
             .drawBehind {
                 drawRoundRect(
                     color = quizCard.eleColor,
@@ -84,7 +81,7 @@ fun QuizCardView(quizCard: QuizCard, navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = quizCard.image),
-                    contentDescription = "Card Image",
+                    contentDescription = "Quiz Card Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -129,7 +126,6 @@ fun QuizCardView(quizCard: QuizCard, navController: NavController) {
     }
 }
 
-// 🔥 Now render the row
 @Composable
 fun QuizCardRow(navController: NavController) {
     LazyRow(
@@ -138,7 +134,7 @@ fun QuizCardRow(navController: NavController) {
             .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(QuizCards) { card ->
+        items(quizCards) { card ->
             QuizCardView(quizCard = card, navController = navController)
         }
     }

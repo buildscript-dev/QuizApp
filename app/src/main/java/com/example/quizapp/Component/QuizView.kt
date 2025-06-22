@@ -33,7 +33,10 @@ import com.example.quizapp.ui.theme.Yellow40
 
 
 @Composable
-fun QuizPallet(quizItem: Quizs, onNextClick: () -> Unit) {
+fun QuizPallet(quizItem: Quizs,
+               onNextClick: () -> Unit,
+
+) {
     val title: TextStyle = TextStyle(
         fontSize = 26.sp,
         fontWeight = FontWeight.W500,

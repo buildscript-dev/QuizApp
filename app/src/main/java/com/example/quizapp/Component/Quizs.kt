@@ -8,6 +8,50 @@ data class Quizs(
     val quizOptions: List<String>,
     val quizAnswer: String
 )
+val quizsTrending = listOf(
+    Quizs(
+        quizImageRes = R.drawable.footballer,
+        quizQuestion = "Famous Portuguese footballer?",
+        quizOptions = listOf("Ronaldo", "Messi", "Neymar", "Mbappe"),
+        quizAnswer = "Ronaldo"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.naruto,
+        quizQuestion = "Naruto’s last name?",
+        quizOptions = listOf("Uzumaki", "Uchiha", "Hatake", "Nara"),
+        quizAnswer = "Uzumaki"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.minecraft,
+        quizQuestion = "Minecraft creator?",
+        quizOptions = listOf("Notch", "Elon", "Mark", "Tim"),
+        quizAnswer = "Notch"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.sun,
+        quizQuestion = "Planet closest to Sun?",
+        quizOptions = listOf("Mercury", "Venus", "Earth", "Mars"),
+        quizAnswer = "Mercury"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.hitler,
+        quizQuestion = "Who was Hitler’s country?",
+        quizOptions = listOf("Germany", "Italy", "Russia", "France"),
+        quizAnswer = "Germany"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.root,
+        quizQuestion = "What is the square root of 49?",
+        quizOptions = listOf("5", "6", "7", "8"),
+        quizAnswer = "7"
+    ),
+    Quizs(
+        quizImageRes = R.drawable.banana,
+        quizQuestion = "Which fruit is yellow and curved?",
+        quizOptions = listOf("Apple", "Banana", "Grapes", "Strawberry"),
+        quizAnswer = "Banana"
+    ),
+    )
 
 val quizsDaily = listOf(
     Quizs(
@@ -344,48 +388,3 @@ val quizsSports = listOf(
     )
 )
 
-val quizsTrending = listOf(
-
-    Quizs(
-        quizImageRes = R.drawable.footballer,
-        quizQuestion = "Famous Portuguese footballer?",
-        quizOptions = listOf("Ronaldo", "Messi", "Neymar", "Mbappe"),
-        quizAnswer = "Ronaldo"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.naruto,
-        quizQuestion = "Naruto’s last name?",
-        quizOptions = listOf("Uzumaki", "Uchiha", "Hatake", "Nara"),
-        quizAnswer = "Uzumaki"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.minecraft,
-        quizQuestion = "Minecraft creator?",
-        quizOptions = listOf("Notch", "Elon", "Mark", "Tim"),
-        quizAnswer = "Notch"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.sun,
-        quizQuestion = "Planet closest to Sun?",
-        quizOptions = listOf("Mercury", "Venus", "Earth", "Mars"),
-        quizAnswer = "Mercury"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.hitler,
-        quizQuestion = "Who was Hitler’s country?",
-        quizOptions = listOf("Germany", "Italy", "Russia", "France"),
-        quizAnswer = "Germany"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.root,
-        quizQuestion = "What is the square root of 49?",
-        quizOptions = listOf("5", "6", "7", "8"),
-        quizAnswer = "7"
-    ),
-    Quizs(
-        quizImageRes = R.drawable.banana,
-        quizQuestion = "Which fruit is yellow and curved?",
-        quizOptions = listOf("Apple", "Banana", "Grapes", "Strawberry"),
-        quizAnswer = "Banana"
-    ),
-    )
