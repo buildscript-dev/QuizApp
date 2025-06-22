@@ -32,13 +32,13 @@ fun QuizPage(navController: NavController, category: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
+            .padding(12.dp)
             .padding(WindowInsets.systemBars.asPaddingValues()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (quizList.isEmpty()) {
             Text(
-                text = "Oops! No quizzes found for \"$category\" 😕",
+                text = "Oops! No quizzes found for \"$category\"",
                 color = Color.Red,
                 fontSize = 18.sp
             )
@@ -59,7 +59,7 @@ fun QuizPage(navController: NavController, category: String) {
             }
         )
 
-        Spacer(Modifier.height(30.dp))
+        Spacer(Modifier.height(10.dp))
 
         Text(
             "Choose the correct answer",
@@ -91,25 +91,25 @@ fun QuizPage(navController: NavController, category: String) {
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold
                 )
+
+
+                Button(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(20.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black,
+                        contentColor = Color.White
+                    ), onClick = {
+                        navController.navigate("Home") {
+                            popUpTo(0) { inclusive = true }
+                        }
+
+                    }) {
+                    Text("Continue")
+
+                }
+
             }
-
-            Button(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(20.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Black,
-                    contentColor = Color.White
-                ), onClick = {
-                    navController.navigate("Home") {
-                        popUpTo(0) { inclusive = true }
-                    }
-
-                }) {
-                Text("Continue")
-
-            }
-
-
         }
     }
 }
