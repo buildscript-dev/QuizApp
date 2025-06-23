@@ -1,6 +1,7 @@
 package com.example.quizapp.Component
 
 import androidx.compose.foundation.Image
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -209,11 +211,42 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
             )
         )
 
+
+        var dateField by remember { mutableStateOf(TextFieldValue("")) }
+
         OutlinedTextField(
-            value = date,
-            onValueChange = { date = it },
+            value = dateField,
+            onValueChange = { newValue ->
+                val rawDigits = newValue.text.filter { it.isDigit() }.take(6)
+
+                val formatted = buildString {
+                    for (i in rawDigits.indices) {
+                        append(rawDigits[i])
+                        if ((i == 1 || i == 3) && i != rawDigits.lastIndex) {
+                            append('/')
+                        }
+                    }
+                }
+
+                // Calculate cursor position
+                val oldCursor = newValue.selection.end
+                var cursorOffset = 0
+
+                if (formatted.length > dateField.text.length) {
+                    if (formatted.getOrNull(oldCursor - 1) == '/') {
+                        cursorOffset = 1
+                    }
+                }
+
+                val newCursor = (oldCursor + cursorOffset).coerceAtMost(formatted.length)
+
+                dateField = TextFieldValue(
+                    text = formatted,
+                    selection = TextRange(newCursor)
+                )
+            },
             label = { Text("Enter DOB") },
-            placeholder = { Text("DM/MM/YY") },
+            placeholder = { Text("DD/MM/YY") },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier
@@ -225,6 +258,8 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
                 disabledBorderColor = Color.LightGray
             )
         )
+
+
 
         Button(
             onClick = {

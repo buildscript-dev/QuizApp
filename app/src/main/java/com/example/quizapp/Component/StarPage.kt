@@ -38,7 +38,7 @@ fun StarPage(navController: NavController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Loading your quiz...",
+                text = "Loading Data...",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Gray
             )
