@@ -39,9 +39,9 @@ import androidx.navigation.NavController
 import com.example.quizapp.R
 
 @Composable
-fun HomePage(navController: NavController) {
+fun HomePage(navController: NavController, userViewModel: UserViewModel) {
+//    val userName = "Ankit"
 
-    val userName = "Madara"
     val categories = getCategoryItems()
 
     val titleStyle = TextStyle(
@@ -86,7 +86,7 @@ fun HomePage(navController: NavController) {
             }
 
             IconButton(
-                onClick = {},
+                onClick = {navController.navigate("Profile")},
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .border(
@@ -104,7 +104,10 @@ fun HomePage(navController: NavController) {
             }
         }
 
-        Text("Hi, $userName", style = titleStyle)
+//        Text("Hi, $userName", style = titleStyle)
+        Text("Hi, ${userViewModel.userName}", style = titleStyle)
+
+
         Text("Welcome to Quiz App", style = subTitleStyle)
 
         CategoryList(categories = categories)

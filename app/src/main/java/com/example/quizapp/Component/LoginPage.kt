@@ -41,6 +41,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -74,7 +75,7 @@ fun LogIn(navController: NavController) {
         Text("Welcome Back", style = title)
         Text("to Rovio", style = title)
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
 
         Text("E-mail", textAlign = TextAlign.Start, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Color.Gray, modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp))
@@ -96,7 +97,6 @@ fun LogIn(navController: NavController) {
                 .padding(horizontal = 20.dp, vertical = 5.dp)
         )
 
-Spacer(Modifier.height(20.dp))
         Text("Password", textAlign = TextAlign.Start, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Color.Gray, modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp))
         OutlinedTextField(
             value = passTF,
@@ -104,6 +104,7 @@ Spacer(Modifier.height(20.dp))
             placeholder = { Text("Enter your password") },
             leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "Email") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation(),
             shape = RoundedCornerShape(25.dp),
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
@@ -129,7 +130,7 @@ Spacer(Modifier.height(20.dp))
 
 
         Button(
-            onClick = {navController.navigate("Home")},
+            onClick = {navController.navigate("Profile")},
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Black,       // background color
                 contentColor = Color.White

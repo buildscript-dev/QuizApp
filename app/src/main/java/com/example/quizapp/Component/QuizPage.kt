@@ -92,21 +92,19 @@ fun QuizPage(navController: NavController, category: String) {
                     fontWeight = FontWeight.Bold
                 )
 
-
                 Button(
-                    modifier = Modifier.fillMaxWidth()
+                    onClick = {
+                        navController.navigate("home")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(20.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Black,
                         contentColor = Color.White
-                    ), onClick = {
-                        navController.navigate("Home") {
-                            popUpTo(0) { inclusive = true }
-                        }
-
-                    }) {
+                    )
+                ) {
                     Text("Continue")
-
                 }
 
             }
