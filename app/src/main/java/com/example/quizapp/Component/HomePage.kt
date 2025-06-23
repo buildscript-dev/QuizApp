@@ -1,17 +1,15 @@
 package com.example.quizapp.Component
 
-import android.widget.Space
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
@@ -28,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -40,8 +39,6 @@ import com.example.quizapp.R
 
 @Composable
 fun HomePage(navController: NavController, userViewModel: UserViewModel) {
-//    val userName = "Ankit"
-
     val categories = getCategoryItems()
 
     val titleStyle = TextStyle(
@@ -69,7 +66,9 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel) {
             horizontalArrangement = Arrangement.End
         ) {
             IconButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate("star")
+                },
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
                     .border(
@@ -110,8 +109,7 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel) {
 
         Text("Welcome to Quiz App", style = subTitleStyle)
 
-        CategoryList(categories = categories)
-        QuizCardRow(navController = navController)
+        QuizHomePage(navController = navController)
 
         Row(
             modifier = Modifier
@@ -128,21 +126,27 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel) {
                     onClick = {},
                     modifier = Modifier
                         .padding(4.dp)
+                        .size(52.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Black)
                         .border(
                             width = 1.dp,
                             color = Color.Black,
                             shape = RoundedCornerShape(25.dp)
-                        )
-                        .size(52.dp)
+                        ),
                 ) {
                     Icon(
                         imageVector = Icons.Default.Home,
-                        contentDescription = "Home"
+                        contentDescription = "Home",
+                        tint = Color.White
                     )
                 }
 
+
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("star")
+                    },
                     modifier = Modifier
                         .padding(4.dp)
                         .border(
@@ -159,7 +163,9 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel) {
                 }
 
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("star")
+                    },
                     modifier = Modifier
                         .padding(4.dp)
                         .border(
@@ -178,7 +184,9 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel) {
 
             // Right single icon
             IconButton(
-                onClick = {},
+                onClick = {
+                    val randomCategory = quizCards.random().category
+                    navController.navigate("QuizStart/$randomCategory")                },
                 modifier = Modifier
                     .padding(4.dp)
                     .border(

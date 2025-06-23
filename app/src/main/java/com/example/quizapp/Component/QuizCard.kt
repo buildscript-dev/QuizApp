@@ -64,7 +64,7 @@ fun QuizCardView(quizCard: QuizCard, navController: NavController) {
             .drawBehind {
                 drawRoundRect(
                     color = quizCard.eleColor,
-                    topLeft = Offset(-10f, 18f),
+                    topLeft = Offset(-20f, 20f),
                     size = Size(size.width, size.height),
                     cornerRadius = CornerRadius(32.dp.toPx(), 32.dp.toPx()),
                     alpha = 0.3f
@@ -127,15 +127,18 @@ fun QuizCardView(quizCard: QuizCard, navController: NavController) {
 }
 
 @Composable
-fun QuizCardRow(navController: NavController) {
+fun QuizCardRow(navController: NavController, cards: List<QuizCard>) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(quizCards) { card ->
-            QuizCardView(quizCard = card, navController = navController)
+//        items(quizCards) { card ->
+//            QuizCardView(quizCard = card, navController = navController)
+//        }
+        items(cards) { card ->
+            QuizCardView(card, navController)
         }
     }
 }

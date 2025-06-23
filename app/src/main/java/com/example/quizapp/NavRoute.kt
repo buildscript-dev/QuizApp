@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.example.quizapp.Component.LogIn
 import com.example.quizapp.Component.ProfilePage
 import com.example.quizapp.Component.QuizPage
+import com.example.quizapp.Component.StarPage
 import com.example.quizapp.Component.UserViewModel
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
@@ -32,8 +33,8 @@ fun NavRoute() {
 //            HomePage(navController = navController)
 //        }
         composable("home") {
-            HomePage(navController = navController, userViewModel = userViewModel)
-        }
+            HomePage(navController = navController, userViewModel = userViewModel)}
+
         composable(
             route = "QuizStart/{category}",
             arguments = listOf(navArgument("category") { type = NavType.StringType })
@@ -46,6 +47,9 @@ fun NavRoute() {
 //        }
         composable("profile") {
             ProfilePage(navController = navController, userViewModel = userViewModel)
+        }
+        composable("star") {
+            StarPage(navController = navController)
         }
 
 

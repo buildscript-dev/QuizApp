@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -194,8 +196,9 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
         OutlinedTextField(
             value = tempName,
             onValueChange = { tempName = it },
-            label = { Text("Enter Username") },
+            label = { Text("Enter UserName") },
             placeholder = { Text("Username") },
+            singleLine = true,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp, ),
@@ -211,6 +214,8 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
             onValueChange = { date = it },
             label = { Text("Enter DOB") },
             placeholder = { Text("DM/MM/YY") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
@@ -229,11 +234,11 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
             modifier = Modifier
                 .padding(16.dp)
                 .width(300.dp)
-                .height(80.dp)
+                .height(50.dp)
                 .border(
                     width = 1.dp,
                     color = Color.Black,
-                    shape = RoundedCornerShape(10.dp)
+                    shape = RoundedCornerShape(16.dp)
                 ),
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
